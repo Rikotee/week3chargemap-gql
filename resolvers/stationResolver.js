@@ -39,6 +39,9 @@ export default {
     modifyStation: async (parent, args) => {
       return await Station.findByIdAndUpdate(args.id, args, { new: true });
     },
+    deleteStation: async (parent, args) => {
+      return await Station.findByIdAndDelete(args.id, args);
+    },
   },
 };
 
