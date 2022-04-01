@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     stations(start: Int, limit: Int, bounds: Bounds): [Station]
+    station(id: ID!): Station
   }
 
   extend type Mutation {

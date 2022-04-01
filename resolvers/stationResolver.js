@@ -18,6 +18,9 @@ export default {
             )
         : stations;
     },
+    station: async (parent, args) => {
+      return await Station.findById(args.id);
+    },
   },
   Mutation: {
     addStation: async (parent, args) => {
@@ -32,8 +35,8 @@ export default {
 
       const newStation = new Station({...args, Connections: conns });
       return newStation.save();
-    }
-  }
+    },
+  },
 };
 
 /*
