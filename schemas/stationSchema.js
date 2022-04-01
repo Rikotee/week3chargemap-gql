@@ -18,6 +18,19 @@ export default gql`
     ): Station
   }
 
+  extend type Mutation {
+    modifyStation(
+      id: ID!
+      Connections: [ConnectionInput]
+      Title: String
+      AddressLine1: String
+      Town: String
+      StateOrProvince: String
+      Postcode: String
+      Location: PointObjectInput
+    ): Station
+  }
+
   type Station {
     id: ID
     Connections: [Connection]

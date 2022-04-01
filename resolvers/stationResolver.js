@@ -36,6 +36,9 @@ export default {
       const newStation = new Station({...args, Connections: conns });
       return newStation.save();
     },
+    modifyStation: async (parent, args) => {
+      return await Station.findByIdAndUpdate(args.id, args, { new: true });
+    },
   },
 };
 
