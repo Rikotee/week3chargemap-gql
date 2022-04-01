@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    stations: [Station]
+    stations(start: Int, limit: Int, bounds: Bounds): [Station]
   }
 
   type Station {
@@ -19,6 +19,16 @@ export default gql`
   type PointObject {
     coordinates: [Float]
     type: String
+  }
+
+  input Bounds {
+    _southWest: LatLng
+    _northEast: LatLng
+  }
+
+  input LatLng {
+    lat: Float
+    lng: Float
   }
 `;
 

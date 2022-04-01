@@ -4,4 +4,10 @@ export default {
   Query: {
     currenttypes: async (parent, args) => await currentType.find(),
   },
+  Connection: {
+    CurrentTypeID: async (parent, args) => {
+      console.log('CurrentTypeID', parent.CurrentTypeID);
+      return await currentType.findById(parent.CurrentTypeID);
+    },
+  },
 };
