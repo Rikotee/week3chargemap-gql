@@ -15,6 +15,7 @@ dotenv.config();
     } else {
       throw new Error('db not connected');
     }
+
     const server = new ApolloServer({
       typeDefs,
       resolvers,

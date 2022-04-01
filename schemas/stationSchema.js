@@ -3,15 +3,22 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     stations: [Station]
-    station(id: ID!): Station
   }
 
   type Station {
     id: ID
+    Connections: [Connection]
     Title: String
-    Town: String
     AddressLine1: String
+    Town: String
     StateOrProvince: String
     Postcode: String
+    Location: PointObject
+  }
+
+  type PointObject {
+    coordinates: [Float]
+    type: String
   }
 `;
+

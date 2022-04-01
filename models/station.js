@@ -1,27 +1,26 @@
 import mongoose from 'mongoose';
-import connections from './connections';
+import Connection from './connection.js';
 
 const Schema = mongoose.Schema;
 
 const stationSchema = new Schema({
-  _id: Schema.Types.ObjectId,
+  Connections: [{ type: mongoose.Types.ObjectId, ref: 'Connection' }],
   Title: String,
-  Town: String,
   AddressLine1: String,
+  Town: String,
   StateOrProvince: String,
   Postcode: String,
   Location: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`
-      enum: ['Point'], // 'location.type' must be 'Point'
-      required: true
+      default: 'Point', // 'location.type' must be 'Point'
     },
     coordinates: {
       type: [Number],
-      required: true
-    }
+      required: true,
+      // index: { type: '2dsphere', sparse: false },
+    },
   },
-  Connections: [{ type: Schema.Types.ObjectId, ref: connections }]
 });
 
 export default mongoose.model('Station', stationSchema);
