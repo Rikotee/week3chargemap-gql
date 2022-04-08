@@ -1,3 +1,4 @@
+import {AuthenticationError} from 'apollo-server-express';
 import Connection from '../models/connection';
 import Station from '../models/station';
 import { rectangleBounds } from '../utils/rectangleBounds';
@@ -23,7 +24,13 @@ export default {
     },
   },
   Mutation: {
-    addStation: async (parent, args) => {
+    addStation: async (parent, args, context) => {
+      console.log(context);
+      // authhorization
+      if(context.user){
+        throw new AuthenticationError('Not authorised');
+      }
+
       // save the connection first
       const conns = await Promise.all(
         args.Connections.map(async (conn) => {
