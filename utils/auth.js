@@ -13,7 +13,7 @@ const login = (req) => {
         if (err) {
           reject(err);
         }
-        const token = jwt.sign(req.user, '23t4uyip-ö');
+        const token = jwt.sign(req.user, 'olujugb');
         resolve({ ...user, token, id: user._id });
       });
     })(req);

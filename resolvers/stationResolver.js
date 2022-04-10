@@ -39,10 +39,16 @@ export default {
       const newStation = new Station({ ...args, Connections: conns });
       return newStation.save();
     },
-    modifyStation: async (parent, args) => {
+    modifyStation: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('Not authorised');
+      }
       return await Station.findByIdAndUpdate(args.id, args, { new: true });
     },
-    deleteStation: async (parent, args) => {
+    deleteStation: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('Not authorised');
+      }
       return await Station.findByIdAndDelete(args.id, args);
     },
   },
